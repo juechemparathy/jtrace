@@ -17,7 +17,17 @@ Chat.prototype.changeRoom = function(room) {
     });
 };
 
+Chat.prototype.getPosition = function(room){
+    if(roomMap[room]=="undefined:undefined"){
+        getCoordinates(room);
+        if(latitude!=0){
+            roomMap[room]=latitude+':'+longitude;
+        }
+    }
+    return roomMap[room];
+}
 
+var roomMap = new Object();
 Chat.prototype.processCommand = function(command) {
     var words = command.split(' ');
     var command = words[0]
@@ -28,7 +38,12 @@ Chat.prototype.processCommand = function(command) {
         case 'join':
             words.shift();
             var room = words.join(' ');
-            this.changeRoom(room);
+
+            getCoordinates(room);
+            if(latitude!=0){
+                roomMap[room]=latitude+':'+longitude;
+                this.changeRoom(room);
+            }
             break;
         case 'nick':
             words.shift();
@@ -41,3 +56,22 @@ Chat.prototype.processCommand = function(command) {
     }
     return message;
 };
+
+
+var geocoder = new google.maps.Geocoder();
+var latitude;
+var longitude;
+function getCoordinates(address) {
+geocoder.geocode( { 'address': address}, function(results, status) {
+
+    if (status == google.maps.GeocoderStatus.OK) {
+         latitude = results[0].geometry.location.lat();
+         longitude = results[0].geometry.location.lng();
+//        alert(results[0].geometry.location.lat() + ' : '+results[0].geometry.location.lng())
+    } else{
+        latitude=0;
+        longitude=0;
+        alert('Geocode was not successful for the following reason: ' + status);
+    }
+});
+}

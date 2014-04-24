@@ -11,32 +11,42 @@ a {
     margin-right: auto;
 }
 #room {
-    background-color: #ddd;
+    background-color: #ADD8E6;
     margin-bottom: 1em;
 }
+
 #messages {
-    width: 690px;
+    width: 500px;
     height: 300px;
     overflow: auto;
-    background-color: #eee;
+    background-color: #ADD8E6;
     margin-bottom: 1em;
     margin-right: 10px;
 }
 
 #room-list {
     float: right;
-    width: 100px;
+    width: 300px;
     height: 300px;
     overflow: auto;
 }
 #room-list div {
-    border-bottom: 1px solid #eee;
+    border-bottom: 2px solid #000000;
 }
+
 #room-list div:hover {
-    background-color: #ddd;
+    background-color: #ADD8E6;
 }
 #send-message {
-    width: 700px;
+    width: 800px;
+    margin-bottom: 1em;
+    margin-right: 1em;
+}
+
+#send-button {
+    background-color: #ADD8E6;
+    width: 800px;
+    height:100px;
     margin-bottom: 1em;
     margin-right: 1em;
 }
