@@ -74,7 +74,8 @@ $(document).ready(function() {
         socket.emit('rooms');
     }, 1000);
     $('#send-message').focus();
-    $('#send-form').submit(function() {
+    $('#send-button').click(function() {
+        getLocation();
         processUserInput(chatApp, socket);
         return false;
     });
@@ -152,9 +153,11 @@ function callback(response, status) {
 
                 if(results[j] != null && results[j].distance != null){
                 locationInfo = results[j].distance.text + ' in '
-                    + results[j].duration.text ;
+                    + results[j].duration.text + ' at '+ new Date().getHours() + ':'+new Date().getMinutes()+':'+new Date().getSeconds();
                  }
             }
+            //Assuming only single origin
+            break;
         }
     }
 }
